@@ -1,6 +1,3 @@
--- require('plugins')
-require('dashboard_settings')
-
 -- Syntastics
 vim.cmd([[
 set statusline+=%#warningmsg#
@@ -557,3 +554,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
   pattern = {'*.md'},
   command = 'setlocal wrap'
 })
+
+-- Import dashboard settings
+require('dashboard_settings')
