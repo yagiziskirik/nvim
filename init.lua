@@ -555,5 +555,8 @@ vim.api.nvim_create_autocmd('BufEnter', {
   command = 'setlocal wrap'
 })
 
+-- Import Github maker
+-- require('github_maker')
+
 -- Import dashboard settings
 require('dashboard_settings')
