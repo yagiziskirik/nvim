@@ -503,6 +503,7 @@ end
 -- Terminal commands
 vim.cmd([[command DeveloperWeb split | resize 7 | wincmd r | term tmux new-session 'npm run dev' \; split-window -h -p 25 'sass --watch scss:static/css'
 command Tt split | resize 7 | wincmd r | term
+command Py split | resize 7 | wincmd r | terminal python %
 tnoremap <Esc> <C-\><C-n>
 ]])
 
@@ -554,9 +555,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
   pattern = {'*.md'},
   command = 'setlocal wrap'
 })
-
--- Import Github maker
--- require('github_maker')
 
 -- Import dashboard settings
 require('dashboard_settings')
