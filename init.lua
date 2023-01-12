@@ -1,7 +1,6 @@
 -- Syntastics
 vim.cmd([[
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 ]])
 
