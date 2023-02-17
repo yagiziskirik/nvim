@@ -1,8 +1,19 @@
 snippet ygzmark "Marks the document adds required documents"
-// Copyright (c) 2022 Yağız Işkırık
+// Copyright (c) 2023 Yağız Işkırık
 //
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+endsnippet
+
+snippet routeTemplate "Adds new router"
+const router = require('express').Router()
+const path = require('path')
+
+router.get('/', (_, res) => {
+	res.render(path.join(__dirname, '..') + '/pages/$1.ejs')
+})
+
+module.exports = router
 endsnippet
 

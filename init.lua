@@ -89,6 +89,7 @@ require('packer').startup(function(use)
   use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}  -- Tab bar
   use 'manzeloth/live-server'  -- Live sercerplugin, use as :LiveServer start/stop
   use 'sirver/ultisnips'  -- Snippets
+  use 'mbbill/undotree'  -- Undo Tree
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -354,12 +355,12 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
 
-  sumneko_lua = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
+  -- sumneko_lua = {
+  --   Lua = {
+  --     workspace = { checkThirdParty = false },
+  --     telemetry = { enable = false },
+  --   },
+  -- },
 }
 
 -- Setup neovim lua configuration
@@ -440,6 +441,9 @@ cmp.setup {
 
 
 -- YGZ Side of things
+vim.cmd [[
+  autocmd BufNewFile,BufRead *.ejs set filetype=html
+]]
 
 -- Bufferline setup
 require 'bufferline'.setup {
@@ -459,6 +463,7 @@ require('telescope').load_extension('projects')
 
 -- Basic settings
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.mouse = 'a'
 vim.opt.syntax = 'on'
 vim.opt.compatible = false
@@ -498,6 +503,9 @@ local function vmap(shortcut, command)
   map('v', shortcut, command)
 end
 
+local function xmap(shortcut, command)
+  map('x', shortcut, command)
+end
 
 -- Terminal commands
 vim.cmd([[command DeveloperWeb split | resize 7 | wincmd r | term tmux new-session 'npm run dev' \; split-window -h -p 25 'sass --watch scss:static/css'
@@ -507,6 +515,20 @@ tnoremap <Esc> <C-\><C-n>
 ]])
 
 -- Shortcuts
+--
+-- Thanks to the Primeagen...
+xmap('<leader>p', "\"_dP")  -- Greatest shortcut
+
+-- Next greatest shortcut by asbjornHaland
+nmap('<leader>y', "\"+y")
+nmap('<leader>Y', "\"+Y")
+vmap('<leader>y', "\"+y")
+
+-- Replace the word
+nmap('<leader>f', ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+
+-- Undotree
+nmap("<leader>u", ":UndotreeToggle<CR>")  -- Opens up the menu
 
 -- VSCode-like shortcuts
 nmap("<A-Down>", ":m .+1<CR>==") -- Moves the line down in normal mode

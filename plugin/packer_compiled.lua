@@ -79,11 +79,6 @@ _G.packer_plugins = {
     path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/AirSupport.nvim",
     url = "https://github.com/yagiziskirik/AirSupport.nvim"
   },
-  ["Comment.nvim"] = {
-    loaded = true,
-    path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/Comment.nvim",
-    url = "https://github.com/numToStr/Comment.nvim"
-  },
   LuaSnip = {
     loaded = true,
     path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -115,11 +110,6 @@ _G.packer_plugins = {
     path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/dashboard-nvim",
     url = "https://github.com/glepnir/dashboard-nvim"
   },
-  fd = {
-    loaded = true,
-    path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/fd",
-    url = "https://github.com/sharkdp/fd"
-  },
   ["fidget.nvim"] = {
     loaded = true,
     path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/fidget.nvim",
@@ -139,11 +129,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
-  },
-  indentLine = {
-    loaded = true,
-    path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/indentLine",
-    url = "https://github.com/Yggdroot/indentLine"
   },
   ["live-server"] = {
     loaded = true,
@@ -223,11 +208,6 @@ _G.packer_plugins = {
     path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
   },
-  ripgrep = {
-    loaded = true,
-    path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/ripgrep",
-    url = "https://github.com/BurntSushi/ripgrep"
-  },
   ["telescope-file-browser.nvim"] = {
     loaded = true,
     path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
@@ -255,6 +235,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/ultisnips",
     url = "https://github.com/sirver/ultisnips"
+  },
+  undotree = {
+    loaded = true,
+    path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/undotree",
+    url = "https://github.com/mbbill/undotree"
   },
   ["vim-commentary"] = {
     loaded = true,
@@ -305,11 +290,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
-  },
-  ["vim-visual-multi"] = {
-    loaded = true,
-    path = "/Users/yagiziskirik/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
-    url = "https://github.com/mg979/vim-visual-multi"
   }
 }
 
