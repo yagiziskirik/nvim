@@ -542,9 +542,11 @@ nmap('<A-S-Up>', 'yyP')  -- Copies the line up in visual mode
 nmap('<C-S-p>', '<Cmd>Telescope projects<CR>')
 
 -- Debugging shortcuts
-nmap('<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
-nmap('<leader>d]', '<cmd>lua vim.diagnostic.goto_next()<CR>')
-nmap('<leader>dd', '<cmd>Telescope diagnostics<CR>')
+nmap('<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<CR>') -- Prev diagnostic
+nmap('<leader>d]', '<cmd>lua vim.diagnostic.goto_next()<CR>')  -- Next diagnostic
+nmap('<leader>dd', '<cmd>Telescope diagnostics<CR>')  -- Shows the list of diagnostics
+nmap('<leader>df', '<cmd>lua vim.lsp.buf.code_action()<CR>')  -- Fixes errors
+
 -- Telescope
 nmap('<C-p>', ':Telescope find_files<CR>')
 
