@@ -447,8 +447,12 @@ vim.cmd [[
 
 -- Bufferline setup
 require 'bufferline'.setup {
-  icon_close_tab = '✕',
-  icon_pinned = '📍'
+  icons = {
+    button = '✕',
+    pinned = {
+      button = '📍'
+    }
+  }
 }
 
 -- Lualine setup
@@ -506,13 +510,6 @@ end
 local function xmap(shortcut, command)
   map('x', shortcut, command)
 end
-
--- Terminal commands
-vim.cmd([[command DeveloperWeb split | resize 7 | wincmd r | term tmux new-session 'npm run dev' \; split-window -h -p 25 'sass --watch scss:static/css'
-command Tt split | resize 7 | wincmd r | term
-command Py split | resize 7 | wincmd r | terminal python %
-tnoremap <Esc> <C-\><C-n>
-]])
 
 -- Shortcuts
 --
