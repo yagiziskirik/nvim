@@ -458,7 +458,7 @@ local async = event == "BufWritePost"
 null_ls.setup({
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
-      vim.keymap.set("n", "<Leader>df", function()
+      vim.keymap.set("n", "<Leader>dq", function()
         vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
       end, { buffer = bufnr, desc = "[lsp] format" })
 
@@ -475,7 +475,7 @@ null_ls.setup({
     end
 
     if client.supports_method("textDocument/rangeFormatting") then
-      vim.keymap.set("x", "<Leader>df", function()
+      vim.keymap.set("x", "<Leader>dq", function()
         vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
       end, { buffer = bufnr, desc = "[lsp] format" })
     end
@@ -580,7 +580,7 @@ nmap('<leader>Y', "\"+Y")
 vmap('<leader>y', "\"+y")
 
 -- Prettier
-nmap('<leader>df', "<cmd>Prettier<CR>")
+nmap('<leader>da', "<cmd>Prettier<CR>")
 
 -- Replace the word
 nmap('<leader>f', ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")

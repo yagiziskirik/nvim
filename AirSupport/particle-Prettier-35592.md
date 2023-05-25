@@ -4,10 +4,10 @@
 Prettify the document
 
 ## Shortcut
-<leader>df
+<leader>da
 
 ## Command
 :Prettier
 
 ## Usage
-Use `<leader>df` or `:Prettier` command to prettify the current document.
+Use `<leader>da` or `:Prettier` command to prettify the current document.
