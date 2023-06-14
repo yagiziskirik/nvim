@@ -74,8 +74,10 @@ require('packer').startup(function(use)
   use 'ryanoasis/vim-devicons'  -- File icons for neovim
   use 'preservim/nerdtree'  -- NERDTree <C-t> to toggle
   use 'Xuyuanp/nerdtree-git-plugin'  -- Shows git status on NERDTree
-  use 'tiagofumo/vim-nerdtree-syntax-highlight'  -- Highlights file names according to the file type
+  use 'johnstef99/vim-nerdtree-syntax-highlight'  -- Highlights file names according to the file type
   use 'tpope/vim-commentary'  -- "gcc" to comment stuff out
+  use 'wakatime/vim-wakatime'  -- For wakatime integration
+  use 'prisma/vim-prisma'  -- Prisma lsp
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
@@ -93,6 +95,15 @@ require('packer').startup(function(use)
   use 'manzeloth/live-server'  -- Live sercerplugin, use as :LiveServer start/stop
   use 'sirver/ultisnips'  -- Snippets
   use 'mbbill/undotree'  -- Undo Tree
+  use {
+    'rmagatti/auto-session',
+    config = function()
+      require("auto-session").setup {
+        log_level = "error",
+        auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+      }
+    end
+  } -- Auto saves and restores session
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -299,6 +310,9 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
+  autotag = {
+    enable = true,
+  }
 }
 
 -- LSP settings.
