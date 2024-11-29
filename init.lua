@@ -92,19 +92,31 @@ require('packer').startup(function(use)
   use 'MunifTanjim/prettier.nvim'  -- Prettier addon
   use 'nvim-tree/nvim-web-devicons'  -- Tab bar icons
   use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}  -- Tab bar
-  use 'manzeloth/live-server'  -- Live sercerplugin, use as :LiveServer start/stop
+  use 'manzeloth/live-server'  -- Live server plugin, use as :LiveServer start/stop
   use 'sirver/ultisnips'  -- Snippets
   use 'mbbill/undotree'  -- Undo Tree
+  use 'jghauser/mkdir.nvim'  -- Create new dir if file not existing
   use {
     'rmagatti/auto-session',
     config = function()
       require("auto-session").setup {
-        log_level = "error",
-        auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+        auto_save_enabled = true,
+        auto_restore_enabled = true,
       }
     end
-  } -- Auto saves and restores session
-
+  }
+  use {
+  "folke/which-key.nvim",
+  config = function()
+    vim.o.timeout = true
+    vim.o.timeoutlen = 300
+    require("which-key").setup {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  end
+}
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
   use {
@@ -199,10 +211,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
 -- See `:help indent_blankline.txt`
-require('indent_blankline').setup {
-  char = '┊',
-  show_trailing_blankline_indent = false,
-  filetype_exclude = { "dashboard" }
+require('ibl').setup {
+  indent = { char = '┊' },
+  whitespace = { remove_blankline_trail = true },
+  exclude = { filetypes = { "dashboard" } }
 }
 
 -- Gitsigns
@@ -229,6 +241,9 @@ require('telescope').setup {
     },
   },
 }
+
+-- Enable telescope file_browser
+require('telescope').load_extension('file_browser')
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -276,6 +291,8 @@ require('nvim-treesitter.configs').setup {
         ['ia'] = '@parameter.inner',
         ['af'] = '@function.outer',
         ['if'] = '@function.inner',
+        ['aP'] = '@assignment.outer',
+        ['iP'] = '@assignment.inner',
         ['ac'] = '@class.outer',
         ['ic'] = '@class.inner',
       },
@@ -500,7 +517,7 @@ null_ls.setup({
 local prettier = require("prettier")
 
 prettier.setup({
-  bin = 'prettier', -- or `'prettierd'` (v0.23.3+)
+  bin = 'prettierd', -- or `'prettierd'` (v0.23.3+)
   filetypes = {
     "css",
     "graphql",
@@ -531,7 +548,8 @@ require 'bufferline'.setup {
 require('lualine').setup {
   options = {
     theme = 'tokyonight'
-  }
+  },
+  sections = {lualine_c = {require('auto-session.lib').current_session_name}}
 }
 
 -- Project.nvim configuration
@@ -575,8 +593,16 @@ local function nmap(shortcut, command)
   map('n', shortcut, command)
 end
 
+local function imap(shortcut, command)
+  map('i', shortcut, command)
+end
+
 local function vmap(shortcut, command)
   map('v', shortcut, command)
+end
+
+local function cmap(shortcut, command)
+  map('c', shortcut, command)
 end
 
 local function xmap(shortcut, command)
@@ -609,6 +635,12 @@ vmap('<A-Down>', ":m '>+1<CR>gv=gv")  -- Moves the line down in visual mode
 vmap('<A-Up>', ":m '<-2<CR>gv=gv")  -- Moves the line up in visual mode
 nmap('<A-S-Down>', 'yyp')  -- Copies the line down in visual mode
 nmap('<A-S-Up>', 'yyP')  -- Copies the line up in visual mode
+nmap("<A-j>", ":m .+1<CR>==") -- Moves the line down in normal mode
+nmap("<A-k>", ":m .-2<CR>==") -- Moves the line up in normal mode
+vmap('<A-j>', ":m '>+1<CR>gv=gv")  -- Moves the line down in visual mode
+vmap('<A-k>', ":m '<-2<CR>gv=gv")  -- Moves the line up in visual mode
+nmap('<A-S-j>', 'yyp')  -- Copies the line down in visual mode
+nmap('<A-S-k>', 'yyP')  -- Copies the line up in visual mode
 
 -- Projects shortcuts
 nmap('<C-S-p>', '<Cmd>Telescope projects<CR>')
@@ -645,11 +677,37 @@ nmap('<Space>0', '<Cmd>BufferLast<CR>')
 nmap('<C-q>', '<Cmd>BufferClose<CR>')
 nmap('<Space>t', '<Cmd>BufferPin<CR>')
 
+-- Insert mode movement
+imap('<C-h>', '<Left>')
+imap('<C-j>', '<Down>')
+imap('<C-k>', '<Up>')
+imap('<C-l>', '<Right>')
+cmap('<C-h>', '<Left>')
+cmap('<C-j>', '<Down>')
+cmap('<C-k>', '<Up>')
+cmap('<C-l>', '<Right>')
+
 -- Set wrap in markdownfiles
 vim.api.nvim_create_autocmd('BufEnter', {
   pattern = {'*.md'},
   command = 'setlocal wrap'
 })
+
+-- Load custom treesitter grammar for org filetype
+-- require('orgmode').setup_ts_grammar()
+
+-- Treesitter configuration
+require('nvim-treesitter.configs').setup {
+  -- If TS highlights are not enabled at all, or disabled via `disable` prop,
+  -- highlighting will fallback to default Vim syntax highlighting
+  highlight = {
+    enable = true,
+    -- Required for spellcheck, some LaTex highlights and
+    -- code block highlights that do not have ts grammar
+    additional_vim_regex_highlighting = {'org'},
+  },
+  ensure_installed = {'org'}, -- Or run :TSUpdate org
+}
 
 -- Import dashboard settings
 require('dashboard_settings')
